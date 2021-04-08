@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace UserManagement.Data
@@ -59,6 +61,18 @@ namespace UserManagement.Data
 
             #region Add some groups
             // Add code to generate demo groups here
+            Group management, development;
+            dc.Groups.Add(management = new Group
+            {
+                Name = "Management",
+            });
+            dc.Groups.Add(development = new Group
+            {
+                Name = "Development",
+            });
+            foo.Memberships = new List<Group> { management };
+            john.Memberships = new List<Group> { management };
+            jane.Memberships = new List<Group> { management };
             #endregion
 
             await dc.SaveChangesAsync();
